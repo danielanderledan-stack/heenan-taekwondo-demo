@@ -64,7 +64,7 @@ main { width: 100%; max-width: 480px; margin: 0 auto; }
 
 /* Tall track gives us room to scrub the kick */
 .scroll-track {
-  height: 320vh;
+  height: 230vh;
   position: relative;
 }
 
@@ -96,7 +96,7 @@ main { width: 100%; max-width: 480px; margin: 0 auto; }
 }
 .word {
   font-family: 'Anton', sans-serif;
-  font-size: clamp(5.6rem, 33vw, 11rem);
+  font-size: clamp(6.4rem, 38vw, 13rem);
   letter-spacing: 0.01em;
   -webkit-background-clip: text;
   background-clip: text;
@@ -115,7 +115,7 @@ main { width: 100%; max-width: 480px; margin: 0 auto; }
 .frames {
   position: relative;
   z-index: 2;
-  width: min(86%, 420px);
+  width: min(98%, 480px);
   aspect-ratio: 1 / 1;
   pointer-events: none;
 }
@@ -135,7 +135,7 @@ main { width: 100%; max-width: 480px; margin: 0 auto; }
 /* --- Scroll hint --- */
 .scroll-hint {
   position: absolute;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 104px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -186,7 +186,7 @@ main { width: 100%; max-width: 480px; margin: 0 auto; }
    ============================================================ */
 .pill-nav {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  top: calc(env(safe-area-inset-top, 0px) + 14px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;

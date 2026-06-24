@@ -25,10 +25,11 @@
     window.setTimeout(reveal, Math.max(0, MIN_TIME - elapsed));
   });
 
-  /* ---------- Scroll-driven frame crossfade ----------
+  /* ---------- Scroll-driven frame switch ----------
      Maps scroll progress through the track (0 → 1) onto three
      kick frames. 0 → frame1, 0.5 → frame2, 1 → frame3.
-     Clamped so it never loops back to frame1. */
+     Hard switch (no crossfade) — exactly one frame is visible
+     at a time, snapping at the segment boundaries. */
   var track = document.querySelector('.scroll-track');
   var frames = Array.prototype.slice.call(document.querySelectorAll('.frame'));
   var hint = document.querySelector('.scroll-hint');
@@ -46,14 +47,12 @@
     // seg goes 0 → 2 across the three frames
     var seg = progress * (frames.length - 1);
 
-    // Triangular crossfade: each frame peaks at its own index
-    var o1 = clamp(1 - seg);
-    var o2 = clamp(1 - Math.abs(seg - 1));
-    var o3 = clamp(seg - 1);
+    // Hard switch: snap to the nearest frame — only one is ever visible
+    var active = Math.round(seg);
 
-    frames[0].style.opacity = o1;
-    frames[1].style.opacity = o2;
-    frames[2].style.opacity = o3;
+    for (var i = 0; i < frames.length; i++) {
+      frames[i].style.opacity = i === active ? 1 : 0;
+    }
 
     // Fade the scroll hint out once the user starts moving
     if (hint) hint.classList.toggle('is-hidden', progress > 0.04);
