@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Heenan Tae Kwon Do — Free Trial</title>
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Loading screen -->
+  <div id="loader" aria-hidden="true">
+    <img src="assets/logo.png" alt="Heenan Tae Kwon Do" class="loader-logo" />
+  </div>
+
+  <main>
+    <!-- Scroll-driven hero -->
+    <section class="hero">
+      <div class="scroll-track">
+        <div class="stage">
+
+          <!-- Header text (behind) -->
+          <div class="hero-text" aria-label="Free Trial">
+            <span class="word word--free">FREE</span>
+            <span class="word word--trial">TRIAL</span>
+          </div>
+
+          <!-- Kick frames (in front, attached to scroll) -->
+          <div class="frames">
+            <img src="assets/frame1.png" alt="" class="frame" data-frame="0" />
+            <img src="assets/frame2.png" alt="" class="frame" data-frame="1" />
+            <img src="assets/frame3.png" alt="" class="frame" data-frame="2" />
+          </div>
+
+          <!-- Scroll hint -->
+          <div class="scroll-hint" aria-hidden="true">
+            <span>SCROLL</span>
+            <span class="scroll-hint__arrow"></span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- White space below to reveal the scroll effect -->
+    <section class="whitespace" aria-hidden="true"></section>
+  </main>
+
+  <!-- Pill navbar -->
+  <nav class="pill-nav" aria-label="Primary">
+    <a href="#" class="pill-nav__item is-active" aria-label="Home">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 10.5 12 3l9 7.5" />
+        <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5" />
+      </svg>
+    </a>
+    <a href="#" class="pill-nav__item">Schedule</a>
+    <a href="#" class="pill-nav__item">Contact</a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>

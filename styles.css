@@ -1,0 +1,232 @@
+/* ============================================================
+   Heenan Tae Kwon Do — Free Trial (mobile-first demo)
+   ============================================================ */
+
+:root {
+  /* Brand palette pulled from the logo */
+  --yellow:        #F4C20D;
+  --yellow-light:  #FCE58C;
+  --blue:          #173A9E;
+  --blue-light:    #8AA2E6;
+  --black:         #0B0B0C;
+  --red:           #D9213A;
+  --white:         #FFFFFF;
+
+  --ink-soft: #5b5d63;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  background: var(--white);
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Mobile-first: cap the experience to a phone-width column, centered */
+main { width: 100%; max-width: 480px; margin: 0 auto; }
+
+/* ============================================================
+   Loading screen
+   ============================================================ */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--white);
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+#loader.is-done {
+  transform: translateY(-100%);
+}
+.loader-logo {
+  width: 132px;
+  height: 132px;
+  animation: spin 1.1s linear infinite;
+  filter: drop-shadow(0 8px 22px rgba(11, 11, 12, 0.18));
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   Hero — scroll-driven kick sequence
+   ============================================================ */
+.hero { position: relative; }
+
+/* Tall track gives us room to scrub the kick */
+.scroll-track {
+  height: 320vh;
+  position: relative;
+}
+
+/* Pinned stage stays in view while the track scrolls past */
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(120% 80% at 50% 18%, #ffffff 55%, #f4f5f8 100%);
+}
+
+/* --- Header text (behind the athlete) --- */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.78;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.word {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(5.6rem, 33vw, 11rem);
+  letter-spacing: 0.01em;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.word--free {
+  background-image: linear-gradient(180deg, var(--yellow) 28%, var(--yellow-light) 100%);
+}
+.word--trial {
+  background-image: linear-gradient(180deg, var(--blue) 30%, var(--blue-light) 100%);
+  margin-top: -0.04em;
+}
+
+/* --- Kick frames (in front of the text) --- */
+.frames {
+  position: relative;
+  z-index: 2;
+  width: min(86%, 420px);
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  will-change: opacity;
+  filter: drop-shadow(0 24px 34px rgba(11, 11, 12, 0.24));
+  transform: translateY(2%);
+}
+.frame[data-frame="0"] { opacity: 1; }
+
+/* --- Scroll hint --- */
+.scroll-hint {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 104px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  color: var(--ink-soft);
+  transition: opacity 0.4s ease;
+}
+.scroll-hint.is-hidden { opacity: 0; }
+.scroll-hint__arrow {
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(180deg, var(--blue), transparent);
+  position: relative;
+  animation: nudge 1.6s ease-in-out infinite;
+}
+.scroll-hint__arrow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--blue);
+  border-bottom: 1.5px solid var(--blue);
+  transform: translate(-50%, 30%) rotate(45deg);
+}
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(6px); opacity: 0.4; }
+}
+
+/* ============================================================
+   White space below — lets the scrub finish on clean white
+   ============================================================ */
+.whitespace {
+  height: 90vh;
+  background: var(--white);
+}
+
+/* ============================================================
+   Pill navbar — floating bottom
+   ============================================================ */
+.pill-nav {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(11, 11, 12, 0.07);
+  border-radius: 999px;
+  box-shadow:
+    0 10px 30px rgba(11, 11, 12, 0.14),
+    0 2px 6px rgba(11, 11, 12, 0.06);
+}
+.pill-nav__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--black);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+}
+.pill-nav__item:active { transform: scale(0.94); }
+.pill-nav__item svg { display: block; }
+.pill-nav__item.is-active {
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: 0 6px 16px rgba(23, 58, 158, 0.4);
+}
+
+/* The loader spin is a functional loading indicator — keep it even
+   under reduced-motion. Only suppress the decorative scroll arrow. */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint__arrow { animation: none; }
+}

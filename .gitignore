@@ -1,0 +1,9 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Original background-removal exports (clean copies live in assets/)
+image_*-fotor-bg-remover-*.png
+3cb5db6bcca4.png
